@@ -6,21 +6,23 @@ session_start();
 
 function password_generator()
 {
-    $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()_+';
-    /* global $_SESSION["length"]; */
+    $passwordLength = $_SESSION["length"];
 
-    $password = '';
-    $alphaLength = strlen($alphabet) - 1;
+    $randomUpper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    $randomLower = "abcdefghijklmnopqrstuvwxyz";
+    $randomSymbol = "!@#$%^&*()-_=+[]{}|;:',.<>?/";
+    $randomNumb = "0123456789";
 
+    $password = [];
 
+    for ($i = 0; $i <= $passwordLength; $i++) {
+        $password .= $randomUpper[rand(0, strlen($randomUpper) - 1)];
+        $password .= $randomLower[rand(0, strlen($randomLower) - 1)];
+        $password .= $randomSymbol[rand(0, strlen($randomSymbol) - 1)];
+        $password .= $randomNumb[rand(0, strlen($randomNumb) - 1)];
+    }
 
-    for ($i = 0; $i < $_SESSION["length"]; $i++) {
-        $n = rand(0, $alphaLength);
-        $password .= $alphabet[$n];
-    };
-
-
-    return $password;
+    return str_shuffle($password);
 }
 
 function validator()
