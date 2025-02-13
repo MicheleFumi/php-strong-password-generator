@@ -1,8 +1,10 @@
 <?php
-
+session_start();
 include_once './functions.php';
 
 
+
+/* var_dump($_SESSION["generated_password"]) */
 ?>
 
 <!DOCTYPE html>
@@ -16,6 +18,7 @@ include_once './functions.php';
 
 <body>
 
+    <h2>La tua password è: <?php echo $_SESSION["generated_password"] ?> </h2>
 </body>
 
 </html>

@@ -1,8 +1,11 @@
 <?php
-
+session_start();
 include_once './functions.php';
+if (isset($_GET["length"])) {
+    $_SESSION["length"] = $_GET["length"];
+    validator();
+}
 
-$inputed_length = $_GET["length"];
 
 ?>
 
@@ -27,7 +30,7 @@ $inputed_length = $_GET["length"];
     </form>
     <hr>
 
-    </h2> <?php echo validator() ?>
+    <h2> <?php echo validator() ?> </h2>
 
 
 </body>
