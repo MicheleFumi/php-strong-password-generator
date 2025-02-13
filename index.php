@@ -26,11 +26,17 @@ if (isset($_GET["length"])) {
         <label for="length">inserisci la lunghezza di caratteri</label>
         <input type="number" name="length" id="">
 
+
+        <label><input type="checkbox" name="uppercase" value="1"> Maiuscole</label>
+        <label><input type="checkbox" name="lowercase" value="1"> Minuscole</label>
+        <label><input type="checkbox" name="numbers" value="1"> Numeri</label>
+        <label><input type="checkbox" name="symbols" value="1"> Simboli</label>
+
         <button type="submit">invia</button>
     </form>
     <hr>
 
-    <h2> <?php echo validator() ?> </h2>
+    <h2> <?php echo validator() . " <br>" . param_validator() ?> </h2>
 
 
 </body>

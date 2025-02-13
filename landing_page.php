@@ -4,7 +4,7 @@ include_once './functions.php';
 
 
 
-/* var_dump($_SESSION["generated_password"]) */
+var_dump($_SESSION["generated_password"])
 ?>
 
 <!DOCTYPE html>

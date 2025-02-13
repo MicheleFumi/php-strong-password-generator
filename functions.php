@@ -13,16 +13,27 @@ function password_generator()
     $randomSymbol = "!@#$%^&*()-_=+[]{}|;:',.<>?/";
     $randomNumb = "0123456789";
 
-    $password = [];
+    $password = "";
+    $all_char = "";
 
-    for ($i = 0; $i <= $passwordLength; $i++) {
-        $password .= $randomUpper[rand(0, strlen($randomUpper) - 1)];
-        $password .= $randomLower[rand(0, strlen($randomLower) - 1)];
-        $password .= $randomSymbol[rand(0, strlen($randomSymbol) - 1)];
-        $password .= $randomNumb[rand(0, strlen($randomNumb) - 1)];
+    if (isset($_GET["uppercase"])) {
+        $all_char .= $randomUpper;
+    }
+    if (isset($_GET["lowercase"])) {
+        $all_char .= $randomLower;
+    }
+    if (isset($_GET["numbers"])) {
+        $all_char .= $randomNumb;
+    }
+    if (isset($_GET["symbols"])) {
+        $all_char .= $randomSymbol;
     }
 
-    return str_shuffle($password);
+    for ($i = 0; $i < $passwordLength; $i++) {
+        $password .= $all_char[rand(0, strlen($all_char) - 1)];
+    }
+
+    return $password;
 }
 
 function validator()
@@ -34,5 +45,12 @@ function validator()
         $_SESSION["generated_password"] = password_generator();
         header("Location: ./landing_page.php");
         exit;
+    }
+}
+
+function param_validator()
+{
+    if (!isset($_GET["uppercase"]) && !isset($_GET["lowercase"]) && !isset($_GET["numbers"]) && !isset($_GET["symbols"])) {
+        return "devi scegliere almeno un parametro!";
     }
 }
