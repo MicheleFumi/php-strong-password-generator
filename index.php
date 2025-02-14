@@ -1,9 +1,22 @@
 <?php
 session_start();
 include_once './functions.php';
-if (isset($_GET["length"])) {
-    $_SESSION["length"] = $_GET["length"];
-    validator();
+
+
+if ($_SERVER["REQUEST_METHOD"] == "GET" && !empty($_GET)) {
+    $_SESSION["length"] = $_GET["length"] ?? 0;
+
+
+    $lengthValidation = validator();
+    $paramValidation = param_validator();
+
+    if ($lengthValidation !== true || $paramValidation !== true) {
+        $message = "";
+    } else {
+        $_SESSION["generated_password"] = password_generator();
+        header("Location: ./landing_page.php");
+        exit;
+    }
 }
 
 
@@ -36,8 +49,22 @@ if (isset($_GET["length"])) {
     </form>
     <hr>
 
-    <h2> <?php echo validator() . " <br>" . param_validator() ?> </h2>
+    <h2>
+        <?php
+        if (!isset($lengthValidation) && !isset($paramValidation)) {
+            echo $message = "Inserisci la lunghezza della password e che tipologia di caratteri deve includere";
+        } elseif ($lengthValidation !== true) {
+            echo $message = "devi inserire il numero di caratteri";
+        } elseif ($paramValidation !== true) {
+            echo $message = "devi scegliere il tipo di caratteri";
+        }
 
+
+        ?>
+    </h2>
+    <h2>
+
+    </h2>
 
 </body>
 

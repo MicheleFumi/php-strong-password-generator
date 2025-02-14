@@ -42,9 +42,7 @@ function validator()
     if ($_SESSION["length"] == 0 || !isset($_SESSION["length"]) || !is_numeric($_SESSION["length"])) {
         return "Inserisci un numero valido!";
     } else {
-        $_SESSION["generated_password"] = password_generator();
-        header("Location: ./landing_page.php");
-        exit;
+        return true;
     }
 }
 
@@ -53,4 +51,5 @@ function param_validator()
     if (!isset($_GET["uppercase"]) && !isset($_GET["lowercase"]) && !isset($_GET["numbers"]) && !isset($_GET["symbols"])) {
         return "devi scegliere almeno un parametro!";
     }
+    return true;
 }
