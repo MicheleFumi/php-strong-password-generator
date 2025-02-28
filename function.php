@@ -37,16 +37,16 @@ function passwordGenerator()
     if (isset($_POST['number'])) {
         $_SESSION['number'] = $_POST['number'];
     }
-    if ($_SESSION['number']) {
+    if ($_SESSION['number'] >= 0 && !empty($all)) {
         for ($i = 0; $i < $_SESSION['number']; $i++) {
-            $randomNumber = rand(1, strlen($all) - 1);
+            $randomNumber = rand(0, strlen($all) - 1);
             $charPosition = $all[$randomNumber];
             $passwordContainer[] = $charPosition;
         }
-    };
-    if (implode($passwordContainer) == '') {
-        return 'scegli almeno un parametro';
-    } else {
-        return '<div><strong> tua password è: </strong></div>' . implode($passwordContainer);
+        if (implode($passwordContainer) == '') {
+            return 'scegli almeno un parametro';
+        } else {
+            return '<div><strong> tua password è: </strong></div>' . implode($passwordContainer);
+        };
     };
 }
