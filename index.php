@@ -1,71 +1,87 @@
 <?php
-session_start();
-include_once './functions.php';
 
 
-if ($_SERVER["REQUEST_METHOD"] == "GET" && !empty($_GET)) {
-    $_SESSION["length"] = $_GET["length"] ?? 0;
-
-
-    $lengthValidation = validator();
-    $paramValidation = param_validator();
-
-    if ($lengthValidation !== true || $paramValidation !== true) {
-        $message = "";
-    } else {
-        $_SESSION["generated_password"] = password_generator();
-        header("Location: ./landing_page.php");
-        exit;
-    }
-}
-
+require_once './function.php'
 
 ?>
 
 
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>php-strong-password-generator</title>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+        crossorigin="anonymous" />
 </head>
 
 <body>
-    <h1>inserisci una password</h1>
-    <form action="" method="get">
-        <label for="length">inserisci la lunghezza di caratteri</label>
-        <input type="number" name="length" id="">
+    <header>
+        <h1 class="text-center py-3">STRONG PASSWORD GENERATOR</h1>
+    </header>
+    <main>
+        <div class="container">
+
+            <form action="" method="post">
+                <div class="my-3">
+                    <label for="number" class="form-label">Inserisci un numero con almeno 5 cifre.</label>
+                    <input type="number" class="form-control" id="number" name="number" min="5" required>
+
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Seleziona i tipi di carattere</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="lowercase" name="lowercase">
+                        <label class="form-check-label" for="lowercase">Caratteri minuscoli</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="uppercase" name="uppercase">
+                        <label class="form-check-label" for="uppercase">Caratteri maiuscoli</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="numbers" name="numbers">
+                        <label class="form-check-label" for="numbers">Numeri</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="symbols" name="symbols">
+                        <label class="form-check-label" for="symbols">Simboli</label>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Invia</button>
+            </form>
 
 
-        <label><input type="checkbox" name="uppercase" value="1"> Maiuscole</label>
-        <label><input type="checkbox" name="lowercase" value="1"> Minuscole</label>
-        <label><input type="checkbox" name="numbers" value="1"> Numeri</label>
-        <label><input type="checkbox" name="symbols" value="1"> Simboli</label>
+            <div class="text-center my-3">
+                <?php echo passwordGenerator(); ?>
+            </div>
 
-        <button type="submit">invia</button>
-    </form>
-    <hr>
+        </div>
+    </main>
+    <footer>
+        <!-- place footer here -->
+    </footer>
+    <!-- Bootstrap JavaScript Libraries -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
 
-    <h2>
-        <?php
-        if (!isset($lengthValidation) && !isset($paramValidation)) {
-            echo $message = "Inserisci la lunghezza della password e che tipologia di caratteri deve includere";
-        } elseif ($lengthValidation !== true) {
-            echo $message = "devi inserire il numero di caratteri";
-        } elseif ($paramValidation !== true) {
-            echo $message = "devi scegliere il tipo di caratteri";
-        }
-
-
-        ?>
-    </h2>
-    <h2>
-
-    </h2>
-
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
