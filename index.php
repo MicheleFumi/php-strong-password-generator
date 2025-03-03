@@ -10,7 +10,7 @@ require_once './function.php'
 <html lang="en">
 
 <head>
-    <title>Title</title>
+    <title>Strong Password Generator</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta
